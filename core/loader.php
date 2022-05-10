@@ -3,6 +3,9 @@
     href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,600,700|Raleway:300,400,400i,500,500i,700,800,900"
     rel="stylesheet">
 
+<!-- Favicons -->
+<link href="assets/img/kaizen.png" rel="icon">
+
 <!-- Vendor CSS Files -->
 <link href="assets/vendor/animate.css/animate.min.css" rel="stylesheet">
 <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
