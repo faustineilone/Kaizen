@@ -1,3 +1,27 @@
+<?php
+require 'core/function.php';
+$pdo = dbConnection();
+$sql = "SELECT * FROM webinar WHERE category_id=?";
+$hasil = $pdo -> query($sql);
+
+if($_GET['page'] == 'Motivation'){
+
+}else if ($_GET['page'] == 'Education'){
+
+}else if ($_GET['page'] == 'Financial'){
+
+}else if ($_GET['page'] == 'Business'){
+
+}else if ($_GET['page'] == 'Health'){
+
+}else if ($_GET['page'] == 'Tips'){
+
+}else if ($_GET['page'] == 'History'){
+
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,7 +40,7 @@
   <script>
     $(document).ready(function(){
       $('a').removeClass('active');
-      $("#id").addClass('active');
+      $("#category").addClass('active');
     });
   </script>
 </head>
@@ -28,17 +52,13 @@
   ?>
   <!-- End Header -->
 
-  <!-- ======= Content Section ======= -->
-  <section id="id">
-    
-  </section>
-  <!-- End Content Section -->
 
+  
   <!-- ======= Footer ======= -->
   <?php 
     include('core/footer.php');
   ?>
   <!-- End  Footer -->
 </body>
-
+  
 </html>

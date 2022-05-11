@@ -1,5 +1,18 @@
-<!DOCTYPE php>
-<php lang="en">
+<?php
+
+require 'core/function.php';
+$pdo = dbConnection();
+// $sql = "SELECT * FROM webinar";
+// $hasil = $pdo -> query($sql);
+
+$trending_query = "SELECT w.*, s.speaker_name FROM webinar w JOIN speaker s ON s.speaker_id = w.speaker_id WHERE status=1";
+$trending_process = $pdo -> query($trending_query);
+$dataTrending = $trending_process -> fetchAll();
+
+?>
+
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
   <meta charset="utf-8">
@@ -28,7 +41,7 @@
   ?>
   <!-- End Header -->
 
-  <!-- ======= Content Section ======= -->
+  <!-- ======= Carousel Section ======= -->
   <section id="hero">
     <div class="hero-container">
       <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="5000">
@@ -83,10 +96,10 @@
 
       </div>
     </div>
-  </section><!-- End Hero Section -->
+  </section><!-- End Carousel Section -->
 
   <section id=main>
-    <main id="main">
+    <main id="main">    
       <!-- ======= Videos in Home Section ======= -->
       <!-- TRENDING NOW -->
       <div id="portfolio" class="portfolio-area mt-5">
@@ -100,76 +113,33 @@
           </div>
 
           <div class="row awesome-project-content portfolio-container">
-            <div class="col-md-3 col-sm-3 col-xs-12 portfolio-item filter-app portfolio-item">
-              <div class="single-awesome-project">
-                <div class="awesome-img">
-                  <img src="assets/img/thumbnail/binar1.png" alt="" />
-                  <div class="add-actions text-center">
-                    <div class="project-dec">
-                      <a class="portfolio-lightbox" data-gallery="myGallery"
-                        href="https://www.youtube.com/watch?v=HULD38d8new">
-                        <h4>CHECKING AND REVIEWING A FINANCIAL MODEL</h4>
-                        <h6>Ian Schnoor</h6>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+          <?php 
+            for($i=0; $i < sizeof($dataTrending); $i++){
+              // die(var_dump($dataTrending[$i]['speaker_name']));
+          ?>
 
-            <div class="col-md-3 col-sm-3 col-xs-12 portfolio-item filter-web">
-              <div class="single-awesome-project">
-                <div class="awesome-img">
-                  <img src="assets/img/thumbnail/binar2.png" alt="" />
-                  <div class="add-actions text-center">
-                    <div class="project-dec">
-                      <a class="portfolio-lightbox" data-gallery="myGallery"
-                        href="https://www.youtube.com/watch?v=jTIsxAiAYsU">
-                        <h4>INTERNAL CONTROL OVER FINANCIAL REPORTING</h4>
-                        <h6>Vidvant Brahmantyo</h6>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-3 col-sm-3 col-xs-12 portfolio-item filter-card">
-              <div class="single-awesome-project">
-                <div class="awesome-img">
-                  <img src="assets/img/thumbnail/binar3.png" alt="" />
-                  <div class="add-actions text-center">
-                    <div class="project-dec">
-                      <a class="portfolio-lightbox" data-gallery="myGallery"
-                        href="https://www.youtube.com/watch?v=tJxHM71QKoo">
-                        <h4>FINANCIAL MODELING <br /> BEST PRACTICES</h4>
-                        <h6>Ian Schnoor</h6>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-3 col-sm-3 col-xs-12 portfolio-item filter-card">
-              <div class="single-awesome-project">
-                <div class="awesome-img">
-                  <img src="assets/img/thumbnail/binar4.png" alt="" />
-                  <div class="add-actions text-center">
-                    <div class="project-dec">
-                      <a class="portfolio-lightbox" data-gallery="myGallery"
-                        href="https://www.youtube.com/watch?v=Zf2haSUVrr0">
-                        <h4>STRATEGI MENGIMPLEMENTASIKAN GOOD CORPORATE GOVERNANCE</h4>
-                        <h6>Angga Hafiidh Fahrizal</h6>
-                      </a>
-                    </div>
+          <div class="col-md-3 col-sm-3 col-xs-12 portfolio-item filter-app portfolio-item">
+            <div class="single-awesome-project">
+              <div class="awesome-img">
+                <img src="<?= $dataTrending[$i]['thumbnail'] ?>" alt="" />
+                <div class="add-actions text-center">
+                  <div class="project-dec">
+                    <a class="portfolio-lightbox" data-gallery="myGallery"
+                      href="<?= $dataTrending[$i]['link'] ?>">
+                      <h4><?= strtoupper($dataTrending[$i]['webinar_title']) ?></h4>
+                      <h6><?= ucwords($dataTrending[$i]['webinar_title']) ?></h6>
+                    </a>
                   </div>
                 </div>
               </div>
             </div>
           </div>
+
+          <?php
+            }
+          ?>
         </div>
-      </div>
+      <!-- </div> -->
 
       <!-- NEW RELEASE -->
       <div id="portfolio" class="portfolio-area mt-4">
@@ -457,5 +427,4 @@
   <!-- End  Footer -->
 
 </body>
-
-</php>
+</html>
