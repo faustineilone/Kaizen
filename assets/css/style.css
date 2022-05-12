@@ -996,8 +996,16 @@ div#preloader {
   margin: 6px 2px;
   padding: 12px 30px;
   text-transform: uppercase;
-  transition: all 0.3s ease 0s;
   border-radius: 30px;
+  transition: 0.5s;
+  color: #fff;
+  background: #3ec1d5;
+}
+
+.php-email-form button:hover {
+  background: #fff;
+  color: #3ec1d5;
+  border: 1px solid #3ec1d5;
 }
 
 @-webkit-keyframes animate-loading {
@@ -1519,7 +1527,6 @@ span.email-notes {
   font-size: 14px;
   letter-spacing: 2px;
   text-transform: uppercase;
-  margin-top: 12px;
 }
 
 .footer-head h4 a {
@@ -1549,6 +1556,7 @@ span.email-notes {
 
 .footer-icons ul li {
   display: inline-block;
+  margin-bottom: 10px;
 }
 
 .footer-icons ul li a {
@@ -1761,6 +1769,50 @@ span.email-notes {
 }
 
 /*--------------------------------------------------------------
+# Sign Up 
+--------------------------------------------------------------*/
+.white-small-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 6rem;
+  background-image: linear-gradient(to left, #19191a, #1a1a1b, #1b1b1d, #1c1c1e, #1d1d20, #212123, #242427, #28282a, #2f2f30, #363637, #3d3d3d, #444444);
+}
+
+.small-white-box {
+  width: 100%;
+  max-width: 25rem;
+  background-color: #fff;
+  box-shadow: 0 1.4rem 8rem rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: .8rem;
+  margin: 8rem 0 5rem; 
+  padding: 50px 0;
+}
+
+.small-logo img {
+  height: 50px;
+  margin-bottom: 15px;
+}
+
+.signup-login-form {
+  max-width: 300px;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.form-link span a {
+  color: #3ec1d5;
+}
+
+.form-link span a:hover {
+  color: #555;
+}
+
+/*--------------------------------------------------------------
 # Responsive
 --------------------------------------------------------------*/
 @media (min-width: 1920px) {
@@ -1811,6 +1863,7 @@ span.email-notes {
 
   .team-content.text-center>h4 {
     font-size: 20px;
+    margin-bottom: 10px;
   }
 
   .sus-btn {

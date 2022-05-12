@@ -26,7 +26,19 @@
             </div>
           </li>
           <li><a href="history.php"><i class="bi bi-clock text-white"></a></i></li>
-          <li><a id="profile" href="profile.php"><i class="bi bi-person text-white fa-lg"></a></i></li>
+
+          <?php 
+            if(!isset($_SESSION['login'])) {
+          ?>
+              <li><a id="profile" href="login.php"><i class="bi bi-person text-white fa-lg"></a></i></li>
+          <?php
+            } else {
+              die(var_dump('logged in'));
+          ?>
+            <li><a id="profile" href="profile.php"><i class="bi bi-person text-white fa-lg"></a></i></li>
+          <?php
+            }
+          ?>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav>

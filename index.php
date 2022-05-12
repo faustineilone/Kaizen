@@ -2,12 +2,10 @@
 
 require 'core/function.php';
 $pdo = dbConnection();
-// $sql = "SELECT * FROM webinar";
-// $hasil = $pdo -> query($sql);
 
-$trending_query = "SELECT w.*, s.speaker_name FROM webinar w JOIN speaker s ON s.speaker_id = w.speaker_id WHERE status=1";
+$trending_query = "SELECT w.*, s.speaker_name FROM webinar w JOIN speaker s ON s.speaker_id = w.speaker_id WHERE status=1 LIMIT 4";
 $trending_process = $pdo -> query($trending_query);
-$dataTrending = $trending_process -> fetchAll();
+$data_trending = $trending_process -> fetchAll();
 
 ?>
 
@@ -114,20 +112,20 @@ $dataTrending = $trending_process -> fetchAll();
 
           <div class="row awesome-project-content portfolio-container">
           <?php 
-            for($i=0; $i < sizeof($dataTrending); $i++){
-              // die(var_dump($dataTrending[$i]['speaker_name']));
+            for($i=0; $i < sizeof($data_trending); $i++){
+              // die(var_dump($data_trending[$i]['speaker_name']));
           ?>
 
           <div class="col-md-3 col-sm-3 col-xs-12 portfolio-item filter-app portfolio-item">
             <div class="single-awesome-project">
               <div class="awesome-img">
-                <img src="<?= $dataTrending[$i]['thumbnail'] ?>" alt="" />
+                <img src="<?= $data_trending[$i]['thumbnail'] ?>" alt="" />
                 <div class="add-actions text-center">
                   <div class="project-dec">
                     <a class="portfolio-lightbox" data-gallery="myGallery"
-                      href="<?= $dataTrending[$i]['link'] ?>">
-                      <h4><?= strtoupper($dataTrending[$i]['webinar_title']) ?></h4>
-                      <h6><?= ucwords($dataTrending[$i]['webinar_title']) ?></h6>
+                      href="<?= $data_trending[$i]['link'] ?>">
+                      <h4><?= strtoupper($data_trending[$i]['webinar_title']) ?></h4>
+                      <h6><?= ucwords($data_trending[$i]['speaker_name']) ?></h6>
                     </a>
                   </div>
                 </div>
