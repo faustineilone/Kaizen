@@ -12,11 +12,11 @@
           <li><a id="subscription" class="nav-link" href="subscription.php">Subscription</a></li>
           <li class="dropdown"><a id="category" href="#">Category<i class="bi bi-chevron-down"></i></a>
             <ul>
-              <li><a href="category.php?page=education">Education</a></li>
-              <li><a href="category.php?page=financial">Financial</a></li>
-              <li><a href="category.php?page=business">Business</a></li>
-              <li><a href="category.php?page=health">Health</a></li>
-              <li><a href="category.php?page=self">Self Development</a></li>
+              <li><a href="category.php?page=Education">Education</a></li>
+              <li><a href="category.php?page=Financial">Financial</a></li>
+              <li><a href="category.php?page=Business">Business</a></li>
+              <li><a href="category.php?page=Health">Health</a></li>
+              <li><a href="category.php?page=Self">Self Development</a></li>
             </ul>
           </li>
           <li class="mt-3 ml-4">

@@ -3,18 +3,18 @@
 require 'core/function.php';
 $pdo = dbConnection();
 
+
 $trending_query = "SELECT w.*, s.speaker_name FROM webinar w JOIN speaker s ON s.speaker_id = w.speaker_id WHERE status=1 LIMIT 4";
 $trending_process = $pdo -> query($trending_query);
 $data_trending = $trending_process -> fetchAll();
 
-$newr_query = "SELECT w.*, s.speaker_name FROM webinar w JOIN speaker s ON s.speaker_id = w.speaker_id ORDER BY w.date LIMIT 4";
+$newr_query = "SELECT w.*, s.speaker_name FROM webinar w JOIN speaker s ON s.speaker_id = w.speaker_id WHERE date < NOW() ORDER BY date DESC LIMIT 4";
 $newr_process = $pdo -> query($newr_query);
 $data_newr = $newr_process -> fetchAll();
 
 $csoon_query = "SELECT w.*, s.speaker_name FROM webinar w JOIN speaker s ON s.speaker_id = w.speaker_id WHERE w.date > NOW() LIMIT 4";
 $csoon_process = $pdo -> query($csoon_query);
 $data_csoon = $csoon_process -> fetchAll();
-// die(var_dump($data_csoon));
 
 ?>
 

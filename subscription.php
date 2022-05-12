@@ -29,20 +29,21 @@
   <!-- End Header -->
 
   <!-- ======= Content Section ======= -->
-  <div class="subs-container">
+  <br /><br /><br /><br /><br /><br />
+  <div class="subs-container col-12">
         <div class="video-post">
             <div class="video-post-thumbnail">
                 <img src="assets/img/thumbnail/binar3.png">
             </div>
-            <div class="video-post-info">
-                <div class="video-post-speaker">
+            <div class="video-post-info col-12">
+                <div class="video-post-speaker col-1">
                     <img src="assets/img/speaker/ian-schnoor.jpg">
                 </div>
-                <div class="video-post-detail-left">
-                    <span class="video-post-title font-weight-bold">Financial Modeling Best Practice</span>
+                <div class="video-post-detail-left col-8">
+                    <span class="video-post-title">Financial Modeling Best Practice</span>
                     <p class="video-post-name">Ian Schnoor</p>
                 </div>
-                <div class="video-post-detail-right">
+                <div class="video-post-detail-right col-3">
                     <span class="video-post-views">1,542,803 Views</span>
                     <p class="vide-post-date">August 21, 2021</p>
                 </div>
@@ -50,7 +51,7 @@
         </div>
     </div>
   <!-- End Content Section -->
-
+  
   <!-- ======= Footer ======= -->
   <?php 
     include('core/footer.php');

@@ -20,13 +20,13 @@
                 <div class="footer-icons">
                   <ul>
                     <li>
-                      <a href="#"><i class="bi bi-facebook"></i></a>
+                      <a href="https://www.facebook.com/profile.php?id=100080960841696"><i class="bi bi-facebook"></i></a>
                     </li>
                     <li>
                       <a href="#"><i class="bi bi-twitter"></i></a>
                     </li>
                     <li>
-                      <a href="#"><i class="bi bi-instagram"></i></a>
+                      <a href="https://www.instagram.com/kaizenwebinar/"><i class="bi bi-instagram"></i></a>
                     </li>
                   </ul>
                 </div>
