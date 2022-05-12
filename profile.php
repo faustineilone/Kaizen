@@ -11,16 +11,19 @@
 
   <?php 
     include('core/loader.php');
+
     if(!isset($_SESSION['loggedIn'])){
       header('Location: login.php');
     } else {
       require 'core/function.php';
       $pdo = dbConnection();
-      $user_query = "SELECT * FROM user WHERE username=?";
+      $user_query = "SELECT * FROM user WHERE username = ?";
       
       $user_process = $pdo -> prepare($user_query);
       $user_process -> execute([$_SESSION['username']]);
       $data_user = $user_process -> fetch();
+
+      $formatted_date_joined = new DateTime($data_user['date_joined']);
     }
   ?> 
   
@@ -45,33 +48,38 @@
                 <img src="assets/img/user.png">
             </div>
             <div class="profile-form">
+                <div class="profile-username">
+                    <h4><?php if(!empty($data_user)) echo $data_user['username']; ?></h4>
+                </div>
+                <div class="profile-date">
+                    <h5 style="color: #3ec1d5;"><?php if(!empty($data_user)) echo "Since " .$formatted_date_joined -> format('F, Y'); ?></h5>
+                </div>
                 <form action="profile_proses.php" method="post" class="php-email-form">
-                    <input type="hidden" name="user_id" >
+                    <input type="hidden" name="user_id" <?php if(!empty($data_user)) echo "value='" . $data_user['user_id'] . "'"; ?>>
                     <p>
                         Username
                         <br /><input type="text" name="username" class="form-control" <?php if(!empty($data_user)) echo "value='" . $data_user['username'] . "'"; ?> required>
                     </p>
                     <p>
                         E-mail
-                        <br /><input type="email" name="email" class="form-control" required>
+                        <br /><input type="email" name="email" class="form-control" <?php if(!empty($data_user)) echo "value='" . $data_user['email'] . "'"; ?> required>
                     </p>
                     <p>
                         Phone Number
-                        <br /><input type="tel" name="phone_no" class="form-control" required>
+                        <br /><input type="tel" name="phone_no" class="form-control" <?php if(!empty($data_user)) echo "value='" . $data_user['phone_no'] . "'"; ?>>
                     </p>
                     <p>
                         Password
-                        <br /><input type="password" name="password" class="form-control" required>
+                        <br /><input type="password" name="password" class="form-control">
                     </p>
-                    <input type="hidden" name="date_joined">
                     <div class="text-center">
-                        <div class="col-12">
+                        <div class="col-12 mt-5">
                             <button class="col-4" type="submit">Save</button>
                             <button class="col-4" type="reset">Cancel</button>
                         </div>
                     </div>
                 </form>
-                <form action="logout_process.php" method="post" id="logout" class="php-email-form">
+                <form action="logout_proses.php" method="post" id="logout" class="php-email-form">
                   <div class="text-center">
                     <div class="col-12">
                       <button class="col-8 button">Log Out</button>

@@ -1746,7 +1746,7 @@ span.email-notes {
   flex-direction: column;
   align-items: center;
   border-radius: 16rem;
-  margin: 12rem 0 5rem;
+  margin-top: 12rem;
   transform: translateY(-18rem);
   position: relative;
 }
@@ -1759,10 +1759,29 @@ span.email-notes {
   border-radius: 16rem;
 }
 
+.profile-username {
+  display: flex;
+  flex-direction: column;
+  transform: translateY(-3rem);
+  align-items: center;
+  position: relative;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.profile-date {
+  display: flex;
+  flex-direction: column;
+  transform: translateY(-3rem);
+  align-items: center;
+  position: relative;
+  letter-spacing: 2px;
+}
+
 .profile-form {
   display: flex;
   flex-direction: column;
-  transform: translateY(-14rem);
+  transform: translateY(-12rem);
   position: relative;
   max-width: 500px;
   width: 100%;

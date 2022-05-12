@@ -7,6 +7,15 @@ $trending_query = "SELECT w.*, s.speaker_name FROM webinar w JOIN speaker s ON s
 $trending_process = $pdo -> query($trending_query);
 $data_trending = $trending_process -> fetchAll();
 
+$newr_query = "SELECT w.*, s.speaker_name FROM webinar w JOIN speaker s ON s.speaker_id = w.speaker_id ORDER BY w.date LIMIT 4";
+$newr_process = $pdo -> query($newr_query);
+$data_newr = $newr_process -> fetchAll();
+
+$csoon_query = "SELECT w.*, s.speaker_name FROM webinar w JOIN speaker s ON s.speaker_id = w.speaker_id WHERE w.date > NOW() LIMIT 4";
+$csoon_process = $pdo -> query($csoon_query);
+$data_csoon = $csoon_process -> fetchAll();
+// die(var_dump($data_csoon));
+
 ?>
 
 <!DOCTYPE html>
@@ -100,7 +109,7 @@ $data_trending = $trending_process -> fetchAll();
     <main id="main">    
       <!-- ======= Videos in Home Section ======= -->
       <!-- TRENDING NOW -->
-      <div id="portfolio" class="portfolio-area mt-5">
+      <div id="portfolio" class="portfolio-area mt-5 mb-5">
         <div class="container">
           <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -113,7 +122,6 @@ $data_trending = $trending_process -> fetchAll();
           <div class="row awesome-project-content portfolio-container">
           <?php 
             for($i=0; $i < sizeof($data_trending); $i++){
-              // die(var_dump($data_trending[$i]['speaker_name']));
           ?>
 
           <div class="col-md-3 col-sm-3 col-xs-12 portfolio-item filter-app portfolio-item">
@@ -137,7 +145,7 @@ $data_trending = $trending_process -> fetchAll();
             }
           ?>
         </div>
-      <!-- </div> -->
+      </div>
 
       <!-- NEW RELEASE -->
       <div id="portfolio" class="portfolio-area mt-4">
@@ -151,74 +159,30 @@ $data_trending = $trending_process -> fetchAll();
           </div>
 
           <div class="row awesome-project-content portfolio-container">
-            <div class="col-md-3 col-sm-3 col-xs-12 portfolio-item filter-app portfolio-item">
-              <div class="single-awesome-project">
-                <div class="awesome-img">
-                  <img src="assets/img/thumbnail/binar5.png" alt="" />
-                  <div class="add-actions text-center">
-                    <div class="project-dec">
-                      <a class="portfolio-lightbox" data-gallery="myGallery"
-                        href="https://www.youtube.com/watch?v=_tTngynwM-k">
-                        <h4>AKUNTANSI PERUSAHAAN DIGITAL: KEUNIKAN DAN TANTANGAN</h4>
-                        <h6>Arry Andrian Simbolon</h6>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+          <?php 
+            for($i=0; $i < sizeof($data_newr); $i++){
+          ?>
 
-            <div class="col-md-3 col-sm-3 col-xs-12 portfolio-item filter-web">
-              <div class="single-awesome-project">
-                <div class="awesome-img">
-                  <img src="assets/img/thumbnail/binar6.png" alt="" />
-                  <div class="add-actions text-center">
-                    <div class="project-dec">
-                      <a class="portfolio-lightbox" data-gallery="myGallery"
-                        href="https://www.youtube.com/watch?v=l3QntsdJh4g">
-                        <h4>MENGEMBANGKAN SEMANGAT GURU DALAM MENINGKATKAN PUBLIKASI ILMIAH</h4>
-                        <h6>Ferial</h6>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-3 col-sm-3 col-xs-12 portfolio-item filter-card">
-              <div class="single-awesome-project">
-                <div class="awesome-img">
-                  <img src="assets/img/thumbnail/binar7.png" alt="" />
-                  <div class="add-actions text-center">
-                    <div class="project-dec">
-                      <a class="portfolio-lightbox" data-gallery="myGallery"
-                        href="https://www.youtube.com/watch?v=gCGnBBdyBC0">
-                        <h4>INVESTIGATIVE AUDITING AND FORENSIC ACCOUNTING</h4>
-                        <h6>Doddy Zulma</h6>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-3 col-sm-3 col-xs-12 portfolio-item filter-card">
-              <div class="single-awesome-project">
-                <div class="awesome-img">
-                  <img src="assets/img/thumbnail/binar8.png" alt="" />
-                  <div class="add-actions text-center">
-                    <div class="project-dec">
-                      <a class="portfolio-lightbox" data-gallery="myGallery"
-                        href="https://www.youtube.com/watch?v=htOAldFIt4Q">
-                        <h4>PEMBELAJARAN INTERAKTIF UNTUK GENERASI Z YANG MENYENANGKAN</h4>
-                        <h6>Riesintiya Aska</h6>
-                      </a>
-                    </div>
+          <div class="col-md-3 col-sm-3 col-xs-12 portfolio-item filter-app portfolio-item">
+            <div class="single-awesome-project">
+              <div class="awesome-img">
+                <img src="<?= $data_newr[$i]['thumbnail'] ?>" alt="" />
+                <div class="add-actions text-center">
+                  <div class="project-dec">
+                    <a class="portfolio-lightbox" data-gallery="myGallery"
+                      href="<?= $data_newr[$i]['link'] ?>">
+                      <h4><?= strtoupper($data_newr[$i]['webinar_title']) ?></h4>
+                      <h6><?= ucwords($data_newr[$i]['speaker_name']) ?></h6>
+                    </a>
                   </div>
                 </div>
               </div>
             </div>
           </div>
+
+          <?php
+            }
+          ?>
         </div>
       </div>
 
@@ -317,105 +281,33 @@ $data_trending = $trending_process -> fetchAll();
           </div>
 
           <div class="row awesome-project-content portfolio-container">
-            <div class="col-md-3 col-sm-3 col-xs-12 portfolio-item filter-app portfolio-item">
-              <div class="single-awesome-project">
-                <div class="awesome-img">
-                  <img src="assets/img/thumbnail/binar13.png" alt="" />
-                  <div class="add-actions text-center">
-                    <div class="project-dec">
-                      <a class="portfolio-lightbox" data-gallery="myGallery" href="assets/img/thumbnail/binar13.png">
-                        <h4>STRATEGI PRAKTIK PEMBELAJARAN KURIKULUM MERDEKA</h4>
-                        <h6>Luluk Elyana</h6>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+          <?php 
+            for($i=0; $i < sizeof($data_csoon); $i++){
+          ?>
 
-            <div class="col-md-3 col-sm-3 col-xs-12 portfolio-item filter-web">
-              <div class="single-awesome-project">
-                <div class="awesome-img">
-                  <img src="assets/img/thumbnail/binar14.png" alt="" />
-                  <div class="add-actions text-center">
-                    <div class="project-dec">
-                      <a class="portfolio-lightbox" data-gallery="myGallery" href="assets/img/thumbnail/binar14.png">
-                        <h4>MENEROPONG ARAH KEBIJAKAN BARU KURIKULUM PENDIDIKAN DASAR DAN MENENGAH</h4>
-                        <h6>Samsudi</h6>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-3 col-sm-3 col-xs-12 portfolio-item filter-card">
-              <div class="single-awesome-project">
-                <div class="awesome-img">
-                  <img src="assets/img/thumbnail/binar15.png" alt="" />
-                  <div class="add-actions text-center">
-                    <div class="project-dec">
-                      <a class="portfolio-lightbox" data-gallery="myGallery" href="assets/img/thumbnail/binar15.png">
-                        <h4>MEMBANGUN BISNIS KULINER <br /> DARI NOL</h4>
-                        <h6>Rex Marindo</h6>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-3 col-sm-3 col-xs-12 portfolio-item filter-card">
-              <div class="single-awesome-project">
-                <div class="awesome-img">
-                  <img src="assets/img/thumbnail/binar16.png" alt="" />
-                  <div class="add-actions text-center">
-                    <div class="project-dec">
-                      <a class="portfolio-lightbox" data-gallery="myGallery" href="assets/img/thumbnail/binar16.png">
-                        <h4>SA 500 BUKTI AUDIT - <br /> AUDIT BERBASIS ISA</h4>
-                        <h6>Ivan Kanel</h6>
-                      </a>
-                    </div>
+          <div class="col-md-3 col-sm-3 col-xs-12 portfolio-item filter-app portfolio-item">
+            <div class="single-awesome-project">
+              <div class="awesome-img">
+                <img src="<?= $data_csoon[$i]['thumbnail'] ?>" alt="" />
+                <div class="add-actions text-center">
+                  <div class="project-dec">
+                    <a class="portfolio-lightbox" data-gallery="myGallery"
+                      href="<?= $data_csoon[$i]['thumbnail'] ?>">
+                      <h4><?= strtoupper($data_csoon[$i]['webinar_title']) ?></h4>
+                      <h6><?= ucwords($data_csoon[$i]['speaker_name']) ?></h6>
+                    </a>
                   </div>
                 </div>
               </div>
             </div>
           </div>
+
+          <?php
+            }
+          ?>
         </div>
       </div>
   </section>
-
-          <!-- Start  Contact -->
-          <div class="col-md-6">
-            <div class="form contact-form">
-              <form action="forms/contact.php" method="post" role="form" class="php-email-form">
-                <div class="form-group">
-                  <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
-                </div>
-                <div class="form-group mt-3">
-                  <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
-                </div>
-                <div class="form-group mt-3">
-                  <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
-                </div>
-                <div class="form-group mt-3">
-                  <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
-                </div>
-                <div class="my-3">
-                  <div class="loading">Loading</div>
-                  <div class="error-message"></div>
-                  <div class="sent-message">Your message has been sent. Thank you!</div>
-                </div>
-                <div class="text-center"><button type="submit">Send Message</button></div>
-              </form>
-            </div>
-          </div>
-          <!-- End Left contact -->
-        </div>
-      </div>
-    </div>
-  </div><!-- End Contact Section -->
-
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
