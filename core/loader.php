@@ -30,5 +30,9 @@
 <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
 <script src="assets/vendor/php-email-form/validate.js"></script>
 
+
+ <!-- Template Main JS File -->
+<script src="assets/js/main.js"></script>
+
 <!-- JQuery JS -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

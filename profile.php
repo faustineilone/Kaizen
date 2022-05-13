@@ -11,7 +11,7 @@
 
   <?php 
     include('core/loader.php');
-
+    
     if(!isset($_SESSION['loggedIn'])){
       header('Location: login.php');
     } else {
@@ -22,8 +22,6 @@
       $user_process = $pdo -> prepare($user_query);
       $user_process -> execute([$_SESSION['username']]);
       $data_user = $user_process -> fetch();
-
-      $formatted_date_joined = new DateTime($data_user['date_joined']);
     }
   ?> 
   
@@ -49,16 +47,19 @@
             </div>
             <div class="profile-form">
                 <div class="profile-username">
-                    <h4><?php if(!empty($data_user)) echo $data_user['username']; ?></h4>
+                    <h4><?= $data_user['username']; ?></h4>
                 </div>
                 <div class="profile-date">
-                    <h5 style="color: #3ec1d5;"><?php if(!empty($data_user)) echo "Since " .$formatted_date_joined -> format('F, Y'); ?></h5>
+                  <?php
+                    $formatted_date_joined = new DateTime($data_user['date_joined']);
+                  ?>
+                    <h5 style="color: #3ec1d5;"><?= "Since " . $formatted_date_joined -> format('F, Y'); ?></h5>
                 </div>
                 <form action="profile_proses.php" method="post" class="php-email-form">
                     <input type="hidden" name="user_id" <?php if(!empty($data_user)) echo "value='" . $data_user['user_id'] . "'"; ?>>
                     <p>
                         Username
-                        <br /><input type="text" name="username" class="form-control" <?php if(!empty($data_user)) echo "value='" . $data_user['username'] . "'"; ?> required>
+                        <br /><input type="text" name="username" class="form-control" <?php if(!empty($data_user)) echo "value='" . $data_user['username'] . "'"; ?> disabled>
                     </p>
                     <p>
                         E-mail
@@ -69,8 +70,16 @@
                         <br /><input type="tel" name="phone_no" class="form-control" <?php if(!empty($data_user)) echo "value='" . $data_user['phone_no'] . "'"; ?>>
                     </p>
                     <p>
-                        Password
-                        <br /><input type="password" name="password" class="form-control">
+                        Current Password
+                        <br /><input type="password" name="cpassword" class="form-control">
+                    </p>
+                    <p>
+                        New Password
+                        <br /><input type="password" name="password1" class="form-control">
+                    </p>
+                    <p>
+                        Confirm New Password
+                        <br /><input type="password" name="password2" class="form-control">
                     </p>
                     <div class="text-center">
                         <div class="col-12 mt-5">

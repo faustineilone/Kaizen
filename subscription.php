@@ -29,7 +29,7 @@
   <!-- End Header -->
 
   <!-- ======= Content Section ======= -->
-  <br /><br /><br /><br /><br /><br />
+  <div class="space"></div>
   <div class="subs-container col-12">
         <div class="video-post">
             <div class="video-post-thumbnail">
@@ -49,7 +49,7 @@
                 </div>
             </div>
         </div>
-    </div>
+  </div>
   <!-- End Content Section -->
   
   <!-- ======= Footer ======= -->

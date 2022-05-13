@@ -54,20 +54,18 @@ $data_csoon = $csoon_process -> fetchAll();
       <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="5000">
 
         <ol id="hero-carousel-indicators" class="carousel-indicators"></ol>
-
         <div class="carousel-inner" role="listbox">
 
           <div class="carousel-item active" style="background-image: url(assets/img/hero-carousel/1.jpg)">
             <div class="carousel-container">
               <div class="container">
-                <h2 class="animate__animated animate__fadeInDown">Welcome To <span style="color: #3ec1d5">K</span>aizen
-                </h2>
+                <h2 class="animate__animated animate__fadeInDown">Welcome To <span style="color: #3ec1d5">K</span>aizen </h2>
                 <p class="animate__animated animate__fadeInUp">Kaizen Help You Find The Best Webinar</p>
                 <a href="#main" class="btn-get-started scrollto animate__animated animate__fadeInUp">Get Started</a>
               </div>
             </div>
           </div>
-
+          
           <div class="carousel-item" style="background-image: url(assets/img/hero-carousel/2.jpg)">
             <div class="carousel-container">
               <div class="container">
@@ -121,7 +119,7 @@ $data_csoon = $csoon_process -> fetchAll();
 
           <div class="row awesome-project-content portfolio-container">
           <?php 
-            for($i=0; $i < sizeof($data_trending); $i++){
+            for($i=0; $i<sizeof($data_trending); $i++){
           ?>
 
           <div class="col-md-3 col-sm-3 col-xs-12 portfolio-item filter-app portfolio-item">

@@ -11,14 +11,14 @@
     $login_process -> execute([$username]);
 
     if($data_login = $login_process -> fetch()) {
-        if(md5($password) === $data_login['password']) {
+        if(password_verify($password, $data_login['password'])) {
             session_start();
             $_SESSION["loggedIn"] = 1;
             $_SESSION["username"] = $data_login['username'];
             header('Location: index.php');
         } else {
-            header('Location: login.php?error=1');
+            header('Location: login.php?error_login=1');
         }
     } else {
-        header('Location: login.php?error=1');
+        header('Location: login.php?error_login=1');
     }

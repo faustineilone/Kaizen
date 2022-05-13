@@ -49,8 +49,8 @@
           <br /><input type="password" name="password" class="form-control" required>
       </p>
       <?php
-        if(isset($_GET['error'])) {
-          echo '<p style="color: red;">Username and Password Don\'t Match!</p>';
+        if(isset($_GET['error_login'])) {
+          echo '<p style="color: red;">Username and password don\'t match!</p>';
         }
       ?>
       <div class="text-center">
@@ -59,10 +59,10 @@
       </div>
       </form>
       <div class="text-center form-link">
-          <span><a href="#" class="col-9">Forgot Your Password?</a></span>
+          <span><a href="#" class="col-9">Forgot your password?</a></span>
       </div>
       <div class="text-center form-link">
-        <span><a href="signup.php" class="col-9">Don't Have an Account?</a></span>
+        <span><a href="signup.php" class="col-9">Don't have an account?</a></span>
       </div>
     </div>
   </div>

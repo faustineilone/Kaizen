@@ -48,6 +48,11 @@
           Username
           <br /><input type="text" name="username" class="form-control" required>
       </p>
+      <?php
+        if(isset($_GET['error_signup'])) {
+          echo '<p style="color: red;">E-mail address or username is already in use!</p>';
+        }
+      ?>
       <p>
           Password
           <br /><input type="password" name="password" class="form-control" required>
@@ -58,7 +63,7 @@
           </div>
       </div>
       <div class="text-center form-link">
-          <span><a href="login.php" class="col-9">Already Have an Account?</a></span>
+          <span><a href="login.php" class="col-9">Already have an account?</a></span>
       </div>
       </form>
     </div>

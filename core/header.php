@@ -16,7 +16,7 @@
               <li><a href="category.php?page=Financial">Financial</a></li>
               <li><a href="category.php?page=Business">Business</a></li>
               <li><a href="category.php?page=Health">Health</a></li>
-              <li><a href="category.php?page=Self">Self Development</a></li>
+              <li><a href="category.php?page=Self Development">Self Development</a></li>
             </ul>
           </li>
           <li class="mt-3 ml-4">
