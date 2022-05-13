@@ -11,7 +11,7 @@ if($_GET['page'] == 'Education'){
 }else if ($_GET['page'] == 'Self Development'){
   $title = 'Self Development';
 }else {
-  $title = 'HI';
+  $title = 'No Data of This Category';
 }
 
 require 'core/function.php';

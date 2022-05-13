@@ -1,4 +1,10 @@
 <!-- ======= Header ======= -->
+<?php
+  $category_query = "SELECT * FROM category";
+  $category_process = $pdo -> query($category_query);
+  $categories = $category_process -> fetchAll();
+?>
+
 <header id="header" class="fixed-top d-flex align-items-center">
     <div class="container d-flex justify-content-between">
 
@@ -12,11 +18,13 @@
           <li><a id="subscription" class="nav-link" href="subscription.php">Subscription</a></li>
           <li class="dropdown"><a id="category" href="#">Category<i class="bi bi-chevron-down"></i></a>
             <ul>
-              <li><a href="category.php?page=Education">Education</a></li>
-              <li><a href="category.php?page=Financial">Financial</a></li>
-              <li><a href="category.php?page=Business">Business</a></li>
-              <li><a href="category.php?page=Health">Health</a></li>
-              <li><a href="category.php?page=Self Development">Self Development</a></li>
+              <?php 
+                for($i=0; $i < sizeof($categories); $i++) {
+                  echo '<li>
+                          <a href="category.php?page=' . $categories[$i]['category_name'] . '">' . $categories[$i]['category_name'] . '</a>
+                        </li>';
+                }
+              ?>
             </ul>
           </li>
           <li class="mt-3 ml-4">
