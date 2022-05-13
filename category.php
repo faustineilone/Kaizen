@@ -105,6 +105,10 @@ $data_category = $category_process -> fetchAll();
     include('core/footer.php');
   ?>
   <!-- End  Footer -->
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
+
 </body>
   
 </html>
