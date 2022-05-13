@@ -314,5 +314,8 @@ $data_csoon = $csoon_process -> fetchAll();
   ?>
   <!-- End  Footer -->
 
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
+
 </body>
 </html>

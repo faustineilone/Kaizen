@@ -1,8 +1,13 @@
 <!-- ======= Header ======= -->
 <?php
+  require_once 'function.php';
+  $pdo = dbConnection();
+
   $category_query = "SELECT * FROM category";
   $category_process = $pdo -> query($category_query);
   $categories = $category_process -> fetchAll();
+
+  $pdo = null;
 ?>
 
 <header id="header" class="fixed-top d-flex align-items-center">
