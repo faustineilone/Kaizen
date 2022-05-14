@@ -105,9 +105,13 @@ if(isset($_GET['speaker_id'])) {
     ?>
         <div class="speaker-vid-section col-6">
             <div class="speaker-vid-thumbnail">
-              <a class="portfolio-lightbox" data-gallery="myGallery" href="<?= $speaker_data['webinars'][$i]['webinar_link'] ?>">
-                <img src="<?= $speaker_data['webinars'][$i]['webinar_thumbnail'] ?>">
-              </a> 
+              <?php if($speaker_data['webinars'][$i]['webinar_date'] < date('Y-m-d')) { ?>
+                <a class="portfolio-lightbox" data-gallery="myGallery" href="<?= $speaker_data['webinars'][$i]['webinar_link'] ?>">
+                  <img src="<?= $speaker_data['webinars'][$i]['webinar_thumbnail'] ?>">
+                </a> 
+              <?php } else { ?>
+                <img class="portfolio-lightbox" data-gallery="myGallery" src="<?= $speaker_data['webinars'][$i]['webinar_thumbnail'] ?>">
+              <?php } ?>
             </div>
             <div class="speaker-vid-detail">
                 <div class="speaker-vid-detail-left">
