@@ -1974,9 +1974,8 @@ span.email-notes {
   color: #fff;
 } */
 
-.speaker-container-2 {
-  display: flex;
-  margin-bottom: 3rem;
+.speaker-vid-section {
+  margin-bottom: 3.5rem;
 }
 
 .speaker-vid-thumbnail {
@@ -2006,6 +2005,7 @@ span.email-notes {
 
 .speaker-vid-detail-left {
   text-align: left;
+  width: 500px;
 }
 
 .speaker-vid-detail-left span {
@@ -2016,6 +2016,7 @@ span.email-notes {
 
 .speaker-vid-detail-right {
   text-align: right;
+  width: 200px;
 }
 
 .speaker-vid-detail-right span {

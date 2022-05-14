@@ -75,7 +75,7 @@ $data_category = $category_process -> fetchAll();
       </a>
     </div>
     <div class="cat-video-speaker">
-      <img src="<?= $data_category[$i]['pic'] ?>">
+      <img onclick="location.href='speaker.php?speaker_id=<?=$data_category[$i]['speaker_id'] ?>'" src="<?= $data_category[$i]['pic'] ?>">
     </div>
     <div class="cat-video-info">
       <div class="cat-video-info-2">
