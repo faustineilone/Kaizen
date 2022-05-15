@@ -14,6 +14,7 @@
         if(password_verify($password, $data_login['password'])) {
             session_start();
             $_SESSION["loggedIn"] = 1;
+            $_SESSION["user_id"] = $data_login['user_id'];
             $_SESSION["username"] = $data_login['username'];
             header('Location: index.php');
         } else {

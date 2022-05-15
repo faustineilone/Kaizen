@@ -1,29 +1,39 @@
 <?php
 
-if($_GET['page'] == 'Education'){
-  $title = 'Education';
-}else if ($_GET['page'] == 'Financial'){
-  $title = 'Financial';
-}else if ($_GET['page'] == 'Business'){
-  $title = 'Business';
-}else if ($_GET['page'] == 'Health'){
-  $title = 'Health';
-}else if ($_GET['page'] == 'Self Development'){
-  $title = 'Self Development';
-}else {
-  $title = 'No Data of This Category';
+$title = 'No Data';
+
+if(isset($_GET['page'])) {
+  // if($_GET['page'] == 'Education'){
+  //   $title = 'Education';
+  // }else if ($_GET['page'] == 'Financial'){
+  //   $title = 'Financial';
+  // }else if ($_GET['page'] == 'Business'){
+  //   $title = 'Business';
+  // }else if ($_GET['page'] == 'Health'){
+  //   $title = 'Health';
+  // }else if ($_GET['page'] == 'Self Development'){
+  //   $title = 'Self Development';
+  // } else {
+  //   $title = 'No Data';
+  // }
+
+  require 'core/function.php';
+  $pdo = dbConnection();
+  $category_query = "SELECT w.*, c.category_name, s.* FROM webinar w 
+                    LEFT JOIN category c ON w.category_id = c.category_id 
+                    LEFT JOIN speaker s ON w.speaker_id = s.speaker_id 
+                    WHERE c.category_name = ? AND w.date < NOW()";
+  $category_process = $pdo -> prepare($category_query);
+  $category_process -> execute([$_GET['page']]);
+  $data_category = $category_process -> fetchAll();
+
+  if(count($data_category) != 0) $title = $_GET['page'];
+  
+  // die(var_dump($data_category));
+} else {
+  $data_category = [];
 }
 
-require 'core/function.php';
-$pdo = dbConnection();
-$category_query = "SELECT w.*, c.category_name, s.* FROM webinar w 
-                  LEFT JOIN category c ON w.category_id = c.category_id 
-                  LEFT JOIN speaker s ON w.speaker_id = s.speaker_id 
-                  WHERE c.category_name = ? AND w.date < NOW()";
-$category_process = $pdo -> prepare($category_query);
-$category_process -> execute([$_GET['page']]);
-$data_category = $category_process -> fetchAll();
-// die(var_dump($data_category));
 
 ?>
 

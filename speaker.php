@@ -1,11 +1,14 @@
 <?php
 
+include('core/loader.php');
+
 $speaker_data = [
   'id' => '',
   'name' => 'NO SPEAKER FOUND',
   'img' => 'assets/img/profpic.png',
   'total_subscriber' => 0,
   'total_webinar' => 0,
+  'subscription_status' => 0,
   'webinars' => [],
   // 'webinars' => [
   //   'webinar_id' => '',
@@ -14,7 +17,7 @@ $speaker_data = [
   //   'webinar_views' => '',
   //   'webinar_date' => '',
   //   'webinar_thumbnail' => '',
-  // ],
+  // ]
 ];
 
 if(isset($_GET['speaker_id'])) {
@@ -26,12 +29,23 @@ if(isset($_GET['speaker_id'])) {
   $speaker_process = $pdo -> prepare($speaker_query);
   $speaker_process -> execute([$_GET['speaker_id']]);
   $data_speaker = $speaker_process -> fetchAll();
+  
+  // For User Status Subscription
+  $subscription_query = "SELECT * FROM subscription WHERE speaker_id = ? AND user_id = ?";
+  $subscription_process = $pdo -> prepare($subscription_query);
+  $subscription_process -> execute([$_GET['speaker_id'], $_SESSION['user_id']]);
+  $data_subscription = $subscription_process -> fetchAll();
+
+  // Get Subscriber of Speaker
+  $subscription_of_speaker_query = "SELECT count(*) AS total_subscriber FROM subscription WHERE speaker_id = ? AND status = ?";
+  $subscription_of_speaker_process = $pdo -> prepare($subscription_of_speaker_query);
+  $subscription_of_speaker_process -> execute([$_GET['speaker_id'], 1]);
+  $data_subscription_of_speaker = $subscription_of_speaker_process -> fetchAll();
 
   if(count($data_speaker) != 0){
     $speaker_data['id'] = $data_speaker[0]['speaker_id'];
     $speaker_data['name'] = $data_speaker[0]['speaker_name'];
     $speaker_data['img'] = $data_speaker[0]['pic'];
-    $speaker_data['total_subscriber'] = 0;
     $speaker_data['total_webinar'] = count($data_speaker);
     
     for($i=0;$i<sizeof($data_speaker);$i++){
@@ -42,6 +56,14 @@ if(isset($_GET['speaker_id'])) {
       $speaker_data['webinars'][$i]['webinar_date'] = $data_speaker[$i]['date'];
       $speaker_data['webinars'][$i]['webinar_thumbnail'] = $data_speaker[$i]['thumbnail'];
     }
+  }
+
+  if(count($data_subscription) != 0){
+    $speaker_data['subscription_status'] = $data_subscription[0]['status'];
+  }
+
+  if(count($data_subscription_of_speaker) != 0){
+    $speaker_data['total_subscriber'] = $data_subscription_of_speaker[0]['total_subscriber'];
   }
 }
 
@@ -59,10 +81,6 @@ if(isset($_GET['speaker_id'])) {
   <title>Kaizen</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
-
-  <?php 
-    include('core/loader.php');
-  ?> 
   
   <script>
     $(document).ready(function(){
@@ -94,7 +112,21 @@ if(isset($_GET['speaker_id'])) {
                     <span><i class="bi bi-person-fill"></i>&ensp;<?= $speaker_data['total_subscriber'] ?> Subscribers &emsp;</span>
                     <span><i class="bi bi-play-circle-fill"></i>&ensp;<?= $speaker_data['total_webinar'] ?> Webinars</span>
                 </div>
-            <button class="btn-get-started scrollto animate__animated">Subscribe</button>
+              <form action="subscribe_proses.php" method="post">
+                <input type="hidden" name="speaker_id" value="<?= $speaker_data['id'] ?>">
+                <input type="hidden" name="status" value="<?= $speaker_data['subscription_status'] ?>">
+                <?php 
+                  if($speaker_data['subscription_status'] == 0) {
+                ?> 
+                  <button class="btn-get-started scrollto animate__animated" type="submit">Subscribe</button>
+                <?php
+                  } else {
+                ?>
+                  <button class="btn-get-started scrollto animate__animated" style='background-color: #ff6666 !important' type="submit">Unsubscribe</button>
+                <?php
+                  } 
+                ?>
+              </form>
         </div>
     </div>
   </section>
