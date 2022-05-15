@@ -44,13 +44,20 @@
           E-mail
           <br /><input type="email" name="email" class="form-control" required>
       </p>
+      <?php
+        if(isset($_GET['error']) && $_GET['error'] == 'email') {
+          echo '<p style="color: red;">E-mail address is already in use!</p>';
+        }
+      ?>
       <p>
           Username
           <br /><input type="text" name="username" class="form-control" required>
       </p>
       <?php
-        if(isset($_GET['error_signup'])) {
-          echo '<p style="color: red;">E-mail address or username is already in use!</p>';
+        if(isset($_GET['error']) && $_GET['error'] == 'emailanduname') {
+          echo '<p style="color: red;">Username and email are already in use!</p>';
+        }else if(isset($_GET['error']) && $_GET['error'] == 'uname') {
+          echo '<p style="color: red;">Username is already in use!</p>';
         }
       ?>
       <p>

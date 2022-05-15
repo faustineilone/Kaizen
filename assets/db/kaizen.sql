@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 13, 2022 at 11:36 AM
+-- Generation Time: May 15, 2022 at 05:21 PM
 -- Server version: 5.7.33
 -- PHP Version: 7.4.19
 
@@ -79,6 +79,26 @@ INSERT INTO `speaker` (`speaker_id`, `speaker_name`, `pic`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `subscription`
+--
+
+CREATE TABLE `subscription` (
+  `subscription_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `speaker_id` int(11) NOT NULL,
+  `status` int(11) NOT NULL COMMENT '0=unsubscribed, 1=subscribed'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `subscription`
+--
+
+INSERT INTO `subscription` (`subscription_id`, `user_id`, `speaker_id`, `status`) VALUES
+(1, 1, 1, 1);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `user`
 --
 
@@ -96,7 +116,9 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`user_id`, `username`, `email`, `password`, `phone_no`, `date_joined`) VALUES
-(1, 'lon', 'faustine.ilone@student.umn.ac.id', '$2y$10$s1jIwh5WkiiVyREXYZN8pOi6lsIqDo0ZnGVnHy7g14jf711ln4XPi', '', '2022-05-13 13:34:44');
+(1, 'lon', 'faustine.ilone@student.umn.ac.id', '$2y$10$g5J4xhDTJ9quzJdhQ.ncZOBb03LL8OR7XKelw8SAwANT5jcfHM91q', '08161641288', '2022-05-15 23:21:17'),
+(2, 'jwh', 'jwh@gmail.com', '$2y$10$jdc68fCCAs8JnQr6aKpRrO59gUgv1pIRjtZDytS11nW9N4lr788aW', NULL, '2022-05-15 23:22:20'),
+(7, 'a', 'a@gmail.com', '$2y$10$J.9a1sNXUgozC4BwGgX8FOP3Sten9/ZCaGtDRnITUlQKbGsZbnsSu', NULL, '2022-05-16 00:18:38');
 
 -- --------------------------------------------------------
 
@@ -157,6 +179,14 @@ ALTER TABLE `speaker`
   ADD PRIMARY KEY (`speaker_id`);
 
 --
+-- Indexes for table `subscription`
+--
+ALTER TABLE `subscription`
+  ADD PRIMARY KEY (`subscription_id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `speaker_id` (`speaker_id`);
+
+--
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
@@ -189,10 +219,16 @@ ALTER TABLE `speaker`
   MODIFY `speaker_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
+-- AUTO_INCREMENT for table `subscription`
+--
+ALTER TABLE `subscription`
+  MODIFY `subscription_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `webinar`
@@ -203,6 +239,13 @@ ALTER TABLE `webinar`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `subscription`
+--
+ALTER TABLE `subscription`
+  ADD CONSTRAINT `subscription_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`),
+  ADD CONSTRAINT `subscription_ibfk_2` FOREIGN KEY (`speaker_id`) REFERENCES `speaker` (`speaker_id`);
 
 --
 -- Constraints for table `webinar`

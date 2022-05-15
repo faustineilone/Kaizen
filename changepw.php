@@ -55,40 +55,35 @@
                   ?>
                     <h5 style="color: #3ec1d5;"><?= "Since " . $formatted_date_joined -> format('F, Y'); ?></h5>
                 </div>
-                <form action="profile_proses.php" method="post" class="php-email-form">
-                    <input type="hidden" name="user_id" <?php if(!empty($data_user)) echo "value='" . $data_user['user_id'] . "'"; ?>>
+                <form action="changepw_proses.php" method="post" class="php-email-form">
                     <p>
-                        Username
-                        <br /><input type="text" name="username" class="form-control" <?php if(!empty($data_user)) echo "value='" . $data_user['username'] . "'"; ?> disabled>
+                        Current Password
+                        <br /><input type="password" name="cpassword" class="form-control" required>
+                    </p>
+                    <?php
+                        if(isset($_GET['error']) && $_GET['error'] == 'cpw') {
+                          echo '<p style="color: red;">Current password doesn\'t match!</p>';
+                        }
+                    ?>
+                    <p>
+                        New Password
+                        <br /><input type="password" name="password1" class="form-control" required>
                     </p>
                     <p>
-                        E-mail
-                        <br /><input type="email" name="email" class="form-control" <?php if(!empty($data_user)) echo "value='" . $data_user['email'] . "'"; ?> required>
+                        Confirm New Password
+                        <br /><input type="password" name="password2" class="form-control" required>
                     </p>
-                    <p>
-                        Phone Number
-                        <br /><input type="tel" name="phone_no" class="form-control" <?php if(!empty($data_user)) echo "value='" . $data_user['phone_no'] . "'"; ?>>
-                    </p>
+                    <?php
+                        if(isset($_GET['error']) && $_GET['error'] == 'npw') {
+                          echo '<p style="color: red;">New password doesn\'t match!</p>';
+                        }
+                    ?>
                     <div class="text-center">
                         <div class="col-12 mt-5">
                             <button class="col-4" type="submit">Save</button>
                             <button class="col-4" type="reset">Reset</button>
                         </div>
                     </div>
-                </form>
-                <form action="changepw.php" method="post" class="php-email-form">
-                <div class="text-center">
-                    <div class="col-12">
-                      <button class="col-8 button">Change Password</button>
-                    </div>
-                  </div>
-                </form>
-                <form action="logout_proses.php" method="post" id="logout" class="php-email-form">
-                  <div class="text-center">
-                    <div class="col-12">
-                      <button class="col-8 button">Log Out</button>
-                    </div>
-                  </div>
                 </form>
             </div>
         </div>
